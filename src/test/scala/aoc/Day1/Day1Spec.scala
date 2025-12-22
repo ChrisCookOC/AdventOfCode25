@@ -38,4 +38,40 @@ class Day1Spec extends AnyWordSpec {
 
   }
 
+  "findNewerPassword" should {
+
+    "doExampleSupplied" in {
+      val example = "L68\nL30\nR48\nL5\nR60\nL55\nL1\nL99\nR14\nL82".split("\n").toList
+      day1.findNewerPassword(example) mustBe 6
+    }
+
+    "handleBigRight" in {
+      val example = "R1000".split("\n").toList
+      day1.findNewerPassword(example) mustBe 10
+    }
+
+    "handleBigLeft" in {
+      val example = "L1000".split("\n").toList
+      day1.findNewerPassword(example) mustBe 10
+    }
+
+    "fixBugs" in {
+      val example = "R31\nL36".split("\n").toList
+      day1.findNewerPassword(example) mustBe 0
+
+      val example2 = "R450".split("\n").toList
+      day1.findNewerPassword(example2) mustBe 5
+
+      val example3 = "L450".split("\n").toList
+      day1.findNewerPassword(example3) mustBe 5
+
+      day1.doTurn2((72,0), "L745") mustBe (27, 7)
+
+      val example4 = "R22\nL745".split("\n").toList
+      day1.findNewerPassword(example4) mustBe 7
+    }
+
+
+  }
+
 }
