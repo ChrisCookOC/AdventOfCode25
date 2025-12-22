@@ -31,6 +31,25 @@ class Day2Spec extends AnyWordSpec {
 
   }
 
+  "checkPalindrome2" should {
+
+    "find them" in {
+      day2.checkPalindrome2("11-22") mustBe List(11, 22)
+      day2.checkPalindrome2("95-115") mustBe List(99, 111)
+      day2.checkPalindrome2("998-1012") mustBe List(999, 1010)
+      day2.checkPalindrome2("222220-222224") mustBe List(222222)
+      day2.checkPalindrome2("1188511880-1188511890") mustBe List(1188511885)
+      day2.checkPalindrome2("1698522-1698528") mustBe List.empty
+      day2.checkPalindrome2("446443-446449") mustBe List(446446)
+      day2.checkPalindrome2("38593856-38593862") mustBe List(38593859)
+      day2.checkPalindrome2("565653-565659") mustBe List(565656)
+      day2.checkPalindrome2("824824821-824824827") mustBe List(824824824)
+      day2.checkPalindrome2("2121212118-2121212124") mustBe List(2121212121)
+
+    }
+
+  }
+
   "palindromeSum" should {
 
     "do the sum" in {
