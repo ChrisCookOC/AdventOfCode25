@@ -8,4 +8,5 @@ lazy val root = (project in file("."))
     libraryDependencies ++= testDeps
   )
 
-val testDeps = Seq("org.scalatestplus" %% "mockito-5-12" % "3.2.19.0").map(_ % "test")
+val testDeps = Seq("org.scalatestplus" %% "mockito-5-18" % "3.2.19.0",
+"org.scalatest" %% "scalatest" % "3.2.19").map(_ % "test")
