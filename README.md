@@ -1,5 +1,5 @@
-# adventOfCode2024
-AoC 2024 OC
+# adventOfCode2025
+AoC 2025 OC
 
 
 Run using sbt "run 1" for day 1, etc
