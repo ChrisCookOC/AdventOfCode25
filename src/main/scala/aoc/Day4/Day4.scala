@@ -1,5 +1,6 @@
 package aoc.Day4
 
+import scala.annotation.tailrec
 import scala.io.Source
 
 case class Location(row: Int, col: Int, isPaper: Boolean, isForkLiftable: Boolean) {
@@ -32,15 +33,32 @@ case class Day4() {
   }
 
   def canBeAccessedByForklift(cell: Coord, map: Map[Coord, Location]): Boolean = {
-    val count = adjacentCellRollCount(cell, map)
     adjacentCellRollCount(cell, map) < 4
   }
 
   def howManyCanBeAccessed(map: Map[Coord, Location]): Int = {
-    val blah = map.map(loc => loc._2.copy(isForkLiftable = canBeAccessedByForklift(loc._1, map)))
-    map.map(loc => if loc._2.isPaper then loc._2.copy(isForkLiftable = canBeAccessedByForklift(loc._1, map)) else loc._2)
-      .count(_.isForkLiftable)
+    workOutWhatCanBeAccessed(map)
+      .count(_._2.isForkLiftable)
   }
+
+  private def workOutWhatCanBeAccessed(map: Map[Coord, Location]): Map[Coord, Location] = {
+    map.map(loc => if loc._2.isPaper then loc._1 -> loc._2.copy(isForkLiftable = canBeAccessedByForklift(loc._1, map)) else loc)
+  }
+
+  def removingAndRepeating(map: Map[Coord, Location]): Int = {
+    removingAndRepeatingInternal(0, map)
+  }
+
+  @tailrec
+  private def removingAndRepeatingInternal(count: Int, map: Map[Coord, Location]): Int = {
+    val newMap = workOutWhatCanBeAccessed(map)
+    val howManyWereRemoved = newMap.count(_._2.isForkLiftable)
+    if howManyWereRemoved == 0 then count
+    else removingAndRepeatingInternal(count + howManyWereRemoved, cleanUpMap(newMap))
+  }
+
+  private def cleanUpMap(map:Map[Coord, Location]): Map[Coord, Location] =
+    map.map(item => if item._2.isForkLiftable then item._1 -> item._2.copy(isPaper = false, isForkLiftable = false) else item)
 
   def run(): Unit = {
 
@@ -50,7 +68,8 @@ case class Day4() {
 
     val map = parseDiagram(list)
 
-    System.out.println("Thing is " + howManyCanBeAccessed(map))
+      System.out.println("Thing is " + howManyCanBeAccessed(map))
+      System.out.println("Thing is " + removingAndRepeating(map))
 
   }
 

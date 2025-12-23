@@ -143,5 +143,15 @@ class Day4Spec extends AnyWordSpec {
     
   }
 
+  "removingAndRepeating" should {
+
+    "doThat" in {
+
+      day4.removingAndRepeating(exampleMap) mustBe 43
+
+    }
+
+  }
+
 
 }
