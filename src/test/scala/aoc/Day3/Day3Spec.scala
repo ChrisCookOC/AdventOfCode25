@@ -21,7 +21,7 @@ class Day3Spec extends AnyWordSpec {
   "findMaxInLine12" should {
 
     "do that" in {
-//      day3.findMaxInLine12("987654321111111") mustBe 987654321111L
+      day3.findMaxInLine12("987654321111111") mustBe 987654321111L
       day3.findMaxInLine12("811111111111119") mustBe 811111111119L
       day3.findMaxInLine12("234234234234278") mustBe 434234234278L
       day3.findMaxInLine12("818181911112111") mustBe 888911112111L
