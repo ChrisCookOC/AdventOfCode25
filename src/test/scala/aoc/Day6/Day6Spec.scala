@@ -17,6 +17,21 @@ class Day6Spec extends AnyWordSpec {
     }
   }
 
+  "parse input new"  should {
+
+    "do thing" in {
+      val input = "123 328  51 64 \n 45 64  387 23 \n  6 98  215 314\n*   +   *   +  ".split("\n").toList
+
+      day6.parseInput2(input) mustBe List(Multiply(List(356, 24, 1)), Add(List(8, 248, 369)), Multiply(List(175, 581, 32)), Add(List(4, 431, 623))).reverse
+
+    }
+
+    "more cases" in {
+      val input = "793\n 33\n  5\n  1\n+  ".split("\n").toList
+      day6.parseInput2(input) mustBe List(Add(List(3351, 93, 7)))
+    }
+  }
+
   "calculateSum" should {
     "do that" in {
       day6.calculateSum(Add(List(328, 64, 98))) mustBe 490
@@ -30,14 +45,21 @@ class Day6Spec extends AnyWordSpec {
       day6.calculateProduct(Multiply(List(51, 387, 215))) mustBe 4243455
     }
   }
-  
+
   "getGrandTotal" should {
     "do that" in {
       var testData = List(Multiply(List(123, 45, 6)), Add(List(328, 64, 98)), Multiply(List(51, 387, 215)), Add(List(64, 23, 314)))
 
       day6.getGrandTotal(testData) mustBe 4277556
     }
+
+    "do that with new data format" in {
+      var testData = List(Multiply(List(356, 24, 1)), Add(List(8, 248, 369)), Multiply(List(175, 581, 32)), Add(List(4, 431, 623)))
+
+      day6.getGrandTotal(testData) mustBe 3263827
+    }
   }
+
 
 
 }
